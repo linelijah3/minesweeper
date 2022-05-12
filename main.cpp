@@ -108,14 +108,12 @@ int main()
                         firstBoard.getTileVector()[i][j].setEndColor();
                         window.draw(firstBoard.getTileVector()[i][j].getSprite(1));
                         window.draw(firstBoard.getTileVector()[i][j].getSprite(3));
-                        firstBoard.setLose();
-                        //break;
                     }
-                    if (firstBoard.getTileVector()[i][j].getAdjacentMines() == 0) {
+                    if (firstBoard.getTileVector()[i][j].getAdjacentMines() == 0 && !firstBoard.getTileVector()[i][j].hasBomb()) {
                         //cout << "should be empty" << endl;
                         window.draw(firstBoard.getTileVector()[i][j].getSprite(1));
                     }
-                    if (firstBoard.getTileVector()[i][j].getAdjacentMines() != 0) {
+                    if (firstBoard.getTileVector()[i][j].getAdjacentMines() != 0 && !firstBoard.getTileVector()[i][j].hasBomb()) {
                         window.draw(firstBoard.getTileVector()[i][j].getSprite(1));
                         window.draw(firstBoard.getTileVector()[i][j].getSprite(3 + firstBoard.getTileVector()[i][j].getAdjacentMines()));
                     }
@@ -205,6 +203,7 @@ int main()
                             firstBoard.getTileVector()[i][j].Reveal();
                             if (firstBoard.getTileVector()[i][j].hasBomb()) {
                                 firstBoard.endGame();
+                                firstBoard.setLose();
                             }
                             else {
                                 firstBoard.addRevealed();
